@@ -153,6 +153,27 @@
     });
   }
 
+  /* ────────── FAQ ACCORDION ────────── */
+  function initFAQ() {
+    var list = document.querySelector("[data-faq]");
+    if (!list) return;
+    list.addEventListener("click", function(e) {
+      var btn = e.target.closest(".faq-question");
+      if (!btn) return;
+      var expanded = btn.getAttribute("aria-expanded") === "true";
+      var answer   = btn.nextElementSibling;
+      // Close all others
+      list.querySelectorAll(".faq-question[aria-expanded='true']").forEach(function(b) {
+        if (b !== btn) {
+          b.setAttribute("aria-expanded", "false");
+          b.nextElementSibling.hidden = true;
+        }
+      });
+      btn.setAttribute("aria-expanded", String(!expanded));
+      answer.hidden = expanded;
+    });
+  }
+
   /* ────────── FORM → WHATSAPP ────────── */
   function initForm() {
     var WA_NUMBER = "59162788381";
@@ -229,6 +250,7 @@
     safe(initReveals,     "initReveals");
     safe(initCountUp,     "initCountUp");
     safe(initTilt,        "initTilt");
+    safe(initFAQ,         "initFAQ");
     safe(initForm,        "initForm");
 
     if (window.gsap && window.ScrollTrigger) {
