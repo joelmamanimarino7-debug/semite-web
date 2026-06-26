@@ -174,6 +174,20 @@
     });
   }
 
+  /* ────────── PENSUM ACCORDION ────────── */
+  function initPensum() {
+    var wrap = document.querySelector("[data-pensum]");
+    if (!wrap) return;
+    wrap.addEventListener("click", function(e) {
+      var btn = e.target.closest(".pensum-head");
+      if (!btn) return;
+      var expanded = btn.getAttribute("aria-expanded") === "true";
+      var body = btn.nextElementSibling;
+      btn.setAttribute("aria-expanded", String(!expanded));
+      body.hidden = expanded;
+    });
+  }
+
   /* ────────── FORM → WHATSAPP ────────── */
   function initForm() {
     var WA_NUMBER = "59162788381";
@@ -220,29 +234,6 @@
     }
   }
 
-  /* ────────── GSAP STAGGER PROGRAMS ────────── */
-  function initProgramsAnim() {
-    if (!window.gsap || !window.ScrollTrigger) return;
-
-    gsap.from(".program-card", {
-      opacity: 0,
-      y: 40,
-      stagger: 0.1,
-      duration: 0.7,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: ".programs-grid",
-        start: "top 80%",
-      }
-    });
-
-    // Remove static reveal class from cards since GSAP handles them
-    $$(".program-card.reveal").forEach(el => {
-      el.classList.remove("reveal");
-      el.classList.add("is-visible");
-    });
-  }
-
   /* ────────── BOOT ────────── */
   function boot() {
     safe(initNav,         "initNav");
@@ -251,12 +242,12 @@
     safe(initCountUp,     "initCountUp");
     safe(initTilt,        "initTilt");
     safe(initFAQ,         "initFAQ");
+    safe(initPensum,      "initPensum");
     safe(initForm,        "initForm");
 
     if (window.gsap && window.ScrollTrigger) {
       try { gsap.registerPlugin(ScrollTrigger); } catch (_) {}
       safe(initHeroParallax,   "initHeroParallax");
-      safe(initProgramsAnim,   "initProgramsAnim");
     }
 
     document.documentElement.classList.add("is-ready");

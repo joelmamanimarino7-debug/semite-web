@@ -561,36 +561,78 @@ h1, h2, h3, h4 { text-wrap: balance; line-height: 1.05; letter-spacing: -0.01em;
   line-height: 1.75;
   margin-bottom: 2rem;
 }
-.about-pillars {
+/* Bloque único Programa Académico (tal como en el documento original) */
+.program-block {
+  margin-top: 5rem;
+  background: var(--blanco);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(2rem, 5vw, 3.5rem);
+  box-shadow: 0 16px 56px rgba(26,20,16,.08);
+  position: relative;
+}
+.program-block::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 4px;
+  background: linear-gradient(90deg, var(--guindo) 0%, var(--azul) 100%);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.program-block-header {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  align-items: flex-end;
+  text-align: right;
+  margin-bottom: 1.5rem;
 }
-.pillar {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
+.program-block-org {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: .85rem;
+  color: var(--tinta-soft);
 }
-.pillar-icon {
-  font-size: 1.1rem;
-  color: var(--guindo);
-  flex-shrink: 0;
-  margin-top: .15rem;
-  width: 24px;
-  text-align: center;
-}
-.pillar strong {
-  display: block;
-  font-family: var(--sans);
-  font-size: .88rem;
-  font-weight: 600;
-  color: var(--tinta);
-  margin-bottom: .25rem;
-}
-.pillar p {
+.program-block-sub {
+  font-family: var(--serif);
+  font-style: italic;
   font-size: .85rem;
   color: var(--tinta-mute);
-  line-height: 1.6;
+}
+.program-block-title {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  color: var(--guindo);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.program-block-h {
+  font-family: var(--sans);
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--tinta);
+  margin: 2rem 0 1rem;
+}
+.program-block-h:first-of-type { margin-top: 0; }
+.program-block-list {
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+  padding-left: 1.25rem;
+}
+.program-block-list li {
+  font-size: .92rem;
+  color: var(--tinta-soft);
+  line-height: 1.65;
+  position: relative;
+}
+.program-block-list li::marker {
+  color: var(--guindo);
+}
+.program-block-text {
+  font-size: .92rem;
+  color: var(--tinta-soft);
+  line-height: 1.75;
 }
 .about-img-frame {
   position: relative;
@@ -670,70 +712,145 @@ h1, h2, h3, h4 { text-wrap: balance; line-height: 1.05; letter-spacing: -0.01em;
   padding: 6rem 0;
   background: var(--crema-2);
 }
-.programs-grid {
+/* Diploma summary cards */
+.diploma-cards {
   display: grid;
-  gap: 1.5rem;
+  gap: 1.25rem;
   grid-template-columns: 1fr;
+  margin-bottom: 3rem;
 }
-.program-card {
+.diploma-card {
   background: var(--blanco);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 2rem;
-  position: relative;
-  overflow: hidden;
-  transition: box-shadow .3s var(--ease-out), transform .3s var(--ease-out), border-color .3s;
-  cursor: default;
+  padding: 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  box-shadow: 0 8px 28px rgba(26,20,16,.06);
 }
-.program-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 3px; height: 100%;
-  background: var(--guindo);
-  transform: scaleY(0);
-  transform-origin: top;
-  transition: transform .3s var(--ease-out);
-}
-.program-card:hover {
-  box-shadow: 0 16px 48px rgba(26,20,16,.12);
-  transform: translateY(-4px);
-  border-color: rgba(123,28,46,.2);
-}
-.program-card:hover::before { transform: scaleY(1); }
-.program-icon {
-  display: block;
-  font-size: .8rem;
+.diploma-years {
+  font-family: var(--sans);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
   color: var(--guindo);
-  margin-bottom: .75rem;
-  letter-spacing: .1em;
 }
-.program-card h3 {
+.diploma-card strong {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--tinta);
+}
+.diploma-card span:last-child {
+  font-size: .85rem;
+  color: var(--tinta-mute);
+}
+
+/* Pensum accordion */
+.pensum-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+.pensum-item {
+  background: var(--blanco);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.pensum-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.5rem;
+  text-align: left;
+  cursor: pointer;
+}
+.pensum-num {
   font-family: var(--display);
   font-size: 1.3rem;
   font-weight: 700;
+  color: var(--guindo);
+  opacity: .4;
+  width: 28px;
+  flex-shrink: 0;
+}
+.pensum-name {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 700;
   color: var(--tinta);
-  margin-bottom: .6rem;
-  line-height: 1.2;
+  flex: 1 1 auto;
 }
-.program-card p {
-  font-size: .88rem;
+.pensum-meta {
+  font-family: var(--sans);
+  font-size: .75rem;
   color: var(--tinta-mute);
-  line-height: 1.65;
+  letter-spacing: .03em;
+  flex-shrink: 0;
 }
-.program-arrow {
-  display: inline-block;
-  margin-top: 1.25rem;
-  font-size: .9rem;
+.pensum-chevron {
+  font-size: 1.1rem;
+  color: var(--guindo);
+  flex-shrink: 0;
+  transition: transform .3s var(--ease-out);
+  width: 16px;
+  text-align: center;
+}
+.pensum-head[aria-expanded="true"] .pensum-chevron {
+  transform: rotate(180deg);
+}
+.pensum-body {
+  padding: 0 1.5rem 1.5rem;
+  overflow-x: auto;
+}
+.pensum-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .85rem;
+}
+.pensum-table thead th {
+  text-align: left;
+  font-family: var(--sans);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--tinta-mute);
+  padding: .5rem .75rem;
+  border-bottom: 1.5px solid var(--line);
+}
+.pensum-table tbody td {
+  padding: .65rem .75rem;
+  border-bottom: 1px solid var(--line-light);
+  color: var(--tinta-soft);
+  vertical-align: top;
+}
+.pensum-table tbody tr:last-child td { border-bottom: 0; }
+.pensum-table tbody td:first-child {
+  font-family: var(--sans);
+  font-size: .75rem;
   color: var(--guindo);
   font-weight: 600;
-  opacity: 0;
-  transform: translateX(-6px);
-  transition: opacity .25s, transform .25s var(--ease-out);
+  white-space: nowrap;
 }
-.program-card:hover .program-arrow {
-  opacity: 1;
-  transform: translateX(0);
+.pensum-table tbody td:nth-child(3),
+.pensum-table tbody td:nth-child(4) {
+  text-align: center;
+  white-space: nowrap;
+  color: var(--tinta-mute);
+}
+.pensum-table em { color: var(--tinta-mute); font-style: italic; }
+.pensum-note {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: .8rem;
+  color: var(--tinta-mute);
+  font-style: italic;
 }
 
 /* =============================================================
@@ -1290,7 +1407,7 @@ h1, h2, h3, h4 { text-wrap: balance; line-height: 1.05; letter-spacing: -0.01em;
 }
 
 @media (min-width: 720px) {
-  .programs-grid {
+  .diploma-cards {
     grid-template-columns: 1fr 1fr;
   }
   .about-grid {
@@ -1316,9 +1433,6 @@ h1, h2, h3, h4 { text-wrap: balance; line-height: 1.05; letter-spacing: -0.01em;
 }
 
 @media (min-width: 960px) {
-  .programs-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
   .gallery-grid {
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: auto auto;
