@@ -690,10 +690,14 @@ h1, h2, h3, h4 { text-wrap: balance; line-height: 1.05; letter-spacing: -0.01em;
 }
 /* Diploma summary cards */
 .diploma-cards {
-  display: grid;
+  display: flex;
+  justify-content: center;
   gap: 1.25rem;
-  grid-template-columns: 1fr;
   margin-bottom: 3rem;
+}
+.diploma-cards .diploma-card {
+  max-width: 320px;
+  width: 100%;
 }
 .diploma-card {
   background: var(--blanco);
@@ -1391,9 +1395,6 @@ h1, h2, h3, h4 { text-wrap: balance; line-height: 1.05; letter-spacing: -0.01em;
 }
 
 @media (min-width: 720px) {
-  .diploma-cards {
-    grid-template-columns: 1fr 1fr;
-  }
   .program-layout {
     grid-template-columns: 1fr 1.4fr;
   }
